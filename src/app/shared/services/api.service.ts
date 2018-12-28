@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ApiResponse } from '../interfaces';
+import { ApiResponse, RequestOptions } from '../interfaces';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { HttpParamsOptions } from '@angular/common/http/src/params';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,24 @@ import { map } from 'rxjs/operators';
 export class ApiService<Type> {
   protected endpoint: string;
   protected http: HttpClient;
+  protected params: RequestOptions = {
+    order: `id DESC`,
+    offset: 0,
+    limit: 20,
+    include_count: true
+  };
   constructor(
     endpoint: string,
     http: HttpClient
   ) {
     this.endpoint = endpoint;
     this.http = http;
+  }
+  request(params: RequestOptions | any): Observable<ApiResponse<Type>> {
+    return this.http.get<ApiResponse<Type>>(
+      `${environment.API_URL}/pietra/_table/${this.endpoint}`,
+      { params: Object.assign(this.params, params) }
+    );
   }
   query(
     order: string = 'id',
