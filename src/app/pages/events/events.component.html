@@ -1,0 +1,17 @@
+<p>
+  events works!
+</p>
+<pre>{{(events$ | async)?.meta | json}}</pre>
+<table *ngIf="(events$ | async)?.resource as events">
+  <tbody>
+    <tr *ngFor="let e of events">
+      <td>{{e.id}}</td>
+      <td>{{e.UF}}</td>
+      <td>{{e.bairro}}</td>
+      <td>{{e.cidade}}</td>
+      <td>{{e.endereco}}</td>
+      <td>{{e.nome}}</td>
+    </tr>
+  </tbody>
+</table>
+<button (click)="next()">Next</button>

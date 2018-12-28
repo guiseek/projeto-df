@@ -1,0 +1,20 @@
+:host {
+  header {
+    display: flex;
+    justify-content: space-between;
+    nav {
+      flex: 1;
+    }
+    .profile,
+    .logout {
+      text-align: right;
+      padding: 15px;
+    }
+    .profile {
+      width: 300px;
+    }
+    .logout {
+      width: 100px;
+    }
+  }
+}

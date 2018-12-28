@@ -1,0 +1,20 @@
+<p>
+  login works!
+</p>
+<p class="text-error">{{error}}</p>
+<form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+  <div>
+    <label>
+      E-mail:
+      <input type="email" formControlName="email" required>
+    </label>
+  </div>
+  <div>
+    <label>
+      Senha
+      <input type="password" formControlName="password" required>
+    </label>
+  </div>
+  <pre>{{loginForm.status | json}}</pre>
+  <button type="submit" [disabled]="loginForm.invalid">Login</button>
+</form>
